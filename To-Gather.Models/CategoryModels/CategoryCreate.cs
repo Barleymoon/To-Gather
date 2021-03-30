@@ -5,17 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace To_Gather.Data
+namespace To_Gather.Models.CategoryModels
 {
-    public class Category
+    public class CategoryCreate
     {
-        [Key]
-        public int CategoryId { get; set; }
-        public Guid OwnerId { get; set; }
         [Required]
+        [MinLength(3, ErrorMessage ="Title must be more than 3 characters.")]
         public string Title { get; set; }
-        [Required]
-        [MaxLength(100, ErrorMessage ="Description cannot be over 100 characters")]
+        [MaxLength(150, ErrorMessage ="Description can not be more than 150 characters.")]
         public string Description { get; set; }
     }
 }
