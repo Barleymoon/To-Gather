@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using To_Gather.Data;
 using To_Gather.WebMVC.Models;
 
 namespace To_Gather.WebMVC.Controllers
