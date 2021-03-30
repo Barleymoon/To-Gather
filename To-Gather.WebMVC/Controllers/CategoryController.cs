@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using To_Gather.Models.CategoryModels;
+using To_Gather.Services;
 
 namespace To_Gather.WebMVC.Controllers
 {
@@ -13,7 +15,10 @@ namespace To_Gather.WebMVC.Controllers
         // GET: Category
         public ActionResult Index()
         {
-            var model = new CategoryListItem[0];
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new CategoryService(userId);
+            var model = service.GetCategories();
+
             return View(model);
         }
 
@@ -28,11 +33,17 @@ namespace To_Gather.WebMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CategoryCreate model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-
+                return View(model);
             }
-            return View(model);
+
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new CategoryService(userId);
+
+            service.CreateCategory(model);
+
+            return RedirectToAction("Index");
         }
     }
 }
