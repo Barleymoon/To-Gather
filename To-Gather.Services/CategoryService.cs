@@ -53,5 +53,38 @@ namespace To_Gather.Services
                 return query.ToArray();
             }
         }
+
+        public CategoryDetail GetCategoryById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(e => e.CategoryId == id && e.OwnerId == _userId);
+                return
+                    new CategoryDetail
+                    {
+                        CategoryId = entity.CategoryId,
+                        Title = entity.Title,
+                        Description = entity.Description
+                    };
+            }
+        }
+
+        public bool UpdateCategory(CategoryEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(e => e.CategoryId == model.CategoryId && e.OwnerId == _userId);
+                entity.Title = model.Title;
+                entity.Description = model.Description;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
