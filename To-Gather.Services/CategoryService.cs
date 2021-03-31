@@ -86,5 +86,20 @@ namespace To_Gather.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteCategories(int catgoryId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Categories
+                        .Single(e => e.CategoryId == catgoryId && e.OwnerId == _userId);
+
+                ctx.Categories.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
