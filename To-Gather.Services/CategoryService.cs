@@ -47,7 +47,8 @@ namespace To_Gather.Services
                                 {
                                     CategoryId = e.CategoryId,
                                     Title = e.Title,
-                                    Description = e.Description
+                                    Description = e.Description,
+                                    CategoryActivities = e.CategoryActivities
                                 }
                         );
                 return query.ToArray();
@@ -67,7 +68,8 @@ namespace To_Gather.Services
                     {
                         CategoryId = entity.CategoryId,
                         Title = entity.Title,
-                        Description = entity.Description
+                        Description = entity.Description,
+                        CategoryActivities = entity.CategoryActivities
                     };
             }
         }

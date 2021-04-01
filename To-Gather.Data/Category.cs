@@ -17,5 +17,8 @@ namespace To_Gather.Data
         [Required]
         [MaxLength(100, ErrorMessage ="Description cannot be over 100 characters")]
         public string Description { get; set; }
+
+        [Display(Name = "Activities for this Category")]
+        public virtual List<Activity> CategoryActivities { get; set; } = new List<Activity>();
     }
 }

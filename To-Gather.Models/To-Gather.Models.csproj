@@ -68,5 +68,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\To-Gather.Data\To-Gather.Data.csproj">
+      <Project>{c2838134-545f-44ce-806f-0fec4f8d2028}</Project>
+      <Name>To-Gather.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
