@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Migrations\202103301741558_InitialCreate.cs" />
@@ -63,6 +64,14 @@
     <Compile Include="Migrations\202103301927422_First.cs" />
     <Compile Include="Migrations\202103301927422_First.Designer.cs">
       <DependentUpon>202103301927422_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104011742236_Second.cs" />
+    <Compile Include="Migrations\202104011742236_Second.Designer.cs">
+      <DependentUpon>202104011742236_Second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104011812443_Typo.cs" />
+    <Compile Include="Migrations\202104011812443_Typo.Designer.cs">
+      <DependentUpon>202104011812443_Typo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +86,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103301927422_First.resx">
       <DependentUpon>202103301927422_First.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104011742236_Second.resx">
+      <DependentUpon>202104011742236_Second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104011812443_Typo.resx">
+      <DependentUpon>202104011812443_Typo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
