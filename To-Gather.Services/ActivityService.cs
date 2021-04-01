@@ -57,5 +57,58 @@ namespace To_Gather.Services
                 return query.ToArray();
             }
         }
+
+        public ActivityDetail GetActivityById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Activities
+                        .Single(a => a.ActivityId == id && a.OwnerId == _userId);
+                return new ActivityDetail
+                {
+                    ActivityId = entity.ActivityId,
+                    Title = entity.Title,
+                    Description = entity.Description,
+                    Equipment = entity.Equipment,
+                    CategoryId = entity.CategoryId
+                };
+            }
+        }
+
+        public bool UpdateActivity(ActivityEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Activities
+                        .Single(a => a.ActivityId == model.ActivityId && a.OwnerId == _userId);
+
+                entity.ActivityId = model.ActivityId;
+                entity.Title = model.Title;
+                entity.Description = model.Description;
+                entity.Equipment = model.Equipment;
+                entity.CategoryId = model.CategoryId;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteActivity(int activityId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Activities
+                        .Single(a => a.ActivityId == activityId && a.OwnerId == _userId);
+
+                ctx.Activities.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
