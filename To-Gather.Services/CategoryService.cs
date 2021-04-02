@@ -48,7 +48,11 @@ namespace To_Gather.Services
                                     CategoryId = e.CategoryId,
                                     Title = e.Title,
                                     Description = e.Description,
-                                    CategoryActivities = e.CategoryActivities
+                                    /*CategoryActivities = new ActivityDisplayItem
+                                    {
+                                        Title = e.Title,
+                                        Description = e.Description
+                                    }*/
                                 }
                         );
                 return query.ToArray();
@@ -69,7 +73,11 @@ namespace To_Gather.Services
                         CategoryId = entity.CategoryId,
                         Title = entity.Title,
                         Description = entity.Description,
-                        CategoryActivities = entity.CategoryActivities
+                        CategoryActivities = entity.CategoryActivities.Select(a => new ActivityDisplayItem()
+                        {
+                            Title = a.Title,
+                            Description = a.Description
+                        }).ToList()
                     };
             }
         }

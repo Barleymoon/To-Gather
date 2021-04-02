@@ -4,16 +4,18 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using To_Gather.Data;
-using To_Gather.Models.ActivityModels;
 
 namespace To_Gather.Models.CategoryModels
 {
-    public class CategoryListItem
+    public class ActivityDisplayItem
     {
-        public int CategoryId { get; set; }
+        public int ActivityId { get; set; }
+
+        [Display(Name ="Activity Title")]
         public string Title { get; set; }
+
+        [Display(Name = "Activity Description")]
         public string Description { get; set; }
-        public List<ActivityDisplayItem> CategoryActivities { get; set; }
+        // public string Equipment { get; set; }
     }
 }
