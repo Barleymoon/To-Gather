@@ -81,8 +81,13 @@
     <Compile Include="Migrations\202104051517077_UserProfile.Designer.cs">
       <DependentUpon>202104051517077_UserProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104052019001_AddedUserActivity.cs" />
+    <Compile Include="Migrations\202104052019001_AddedUserActivity.Designer.cs">
+      <DependentUpon>202104052019001_AddedUserActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserActivity.cs" />
     <Compile Include="UserProfile.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104051517077_UserProfile.resx">
       <DependentUpon>202104051517077_UserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104052019001_AddedUserActivity.resx">
+      <DependentUpon>202104052019001_AddedUserActivity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

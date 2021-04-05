@@ -5,28 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace To_Gather.Models.UserModels
+namespace To_Gather.Models.UserProfileModels
 {
-    public class UserProfileCreate
+    public class UserProfileDetail
     {
-        [Required]
-        [Display(Name ="UserName")]
-        [MaxLength(20, ErrorMessage ="UserName must be under 20 characters")]
+        public int ProfileId { get; set; }
         public string UserName { get; set; }
-
-        [Required]
         public string FirstName { get; set; }
-
-        [Required]
         public string LastName { get; set; }
 
-        [Required]
+        [Display(Name = "Created User")]
+        public DateTimeOffset CreatedUser { get; set; }
         public int Age { get; set; }
-
         public string Email { get; set; }
-
         public List<int> ActivityIds { get; set; }
-       /* [Display(Name = "User Created")]
-        public DateTimeOffset CreatedUser { get; set; }*/
+
+        // public List<UserActivity> UserActivities { get; set; }
+        
+        // public List<UserEvent> UserEvents { get; set; }
     }
 }
