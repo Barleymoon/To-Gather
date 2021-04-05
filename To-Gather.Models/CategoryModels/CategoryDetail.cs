@@ -12,6 +12,7 @@ namespace To_Gather.Models.CategoryModels
         public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        // public List<ActivityDisplayItem> CategoryActivities { get; set; }
         public List<ActivityDisplayItem> CategoryActivities { get; set; }
     }
 }

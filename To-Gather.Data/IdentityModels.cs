@@ -34,6 +34,7 @@ namespace To_Gather.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

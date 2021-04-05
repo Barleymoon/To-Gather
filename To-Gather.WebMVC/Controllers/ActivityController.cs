@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+// using To_Gather.Data;
 using To_Gather.Models.ActivityModels;
 using To_Gather.Services;
 
@@ -12,6 +13,7 @@ namespace To_Gather.WebMVC.Controllers
     [Authorize]
     public class ActivityController : Controller
     {
+        // private ApplicationDbContext _db = new ApplicationDbContext();
         // GET: Activity
         public ActionResult Index()
         {
@@ -25,9 +27,12 @@ namespace To_Gather.WebMVC.Controllers
         //GET
         public ActionResult Create()
         {
+            // Trying to make drop down list for Activity create
+            // ViewBag.Category = new SelectList(_db.Categories, "CategoryId", "Title");
             return View();
         }
 
+        
         //POST: Activity/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

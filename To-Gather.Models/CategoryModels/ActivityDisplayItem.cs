@@ -9,7 +9,7 @@ namespace To_Gather.Models.CategoryModels
 {
     public class ActivityDisplayItem
     {
-        public int ActivityId { get; set; }
+        // public int ActivityId { get; set; }
 
         [Display(Name ="Activity Title")]
         public string Title { get; set; }

@@ -75,8 +75,9 @@ namespace To_Gather.Services
                         Description = entity.Description,
                         CategoryActivities = entity.CategoryActivities.Select(a => new ActivityDisplayItem()
                         {
+                            // ActivityId = a.ActivityId,
                             Title = a.Title,
-                            Description = a.Description
+                            // Description = a.Description
                         }).ToList()
                     };
             }

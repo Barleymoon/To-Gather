@@ -73,8 +73,17 @@
     <Compile Include="Migrations\202104011812443_Typo.Designer.cs">
       <DependentUpon>202104011812443_Typo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104051454372_Updated.cs" />
+    <Compile Include="Migrations\202104051454372_Updated.Designer.cs">
+      <DependentUpon>202104051454372_Updated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104051517077_UserProfile.cs" />
+    <Compile Include="Migrations\202104051517077_UserProfile.Designer.cs">
+      <DependentUpon>202104051517077_UserProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -92,6 +101,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104011812443_Typo.resx">
       <DependentUpon>202104011812443_Typo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104051454372_Updated.resx">
+      <DependentUpon>202104051454372_Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104051517077_UserProfile.resx">
+      <DependentUpon>202104051517077_UserProfile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
