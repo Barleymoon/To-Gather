@@ -22,7 +22,7 @@ namespace To_Gather.Services
 
         public bool CreateUser(UserProfileCreate model)
         {
-            List<Activity> allActivities = _db.Activities.ToList();
+            IEnumerable<Activity> allActivities = _db.Activities.ToList();
 
             UserProfile userProfile = new UserProfile()
             {
@@ -38,9 +38,9 @@ namespace To_Gather.Services
             return _db.SaveChanges() > 0;
         }
 
-        public List<UserProfileListItem> GetProfile()
+        public IEnumerable<UserProfileListItem> GetProfile()
         {
-            List<UserProfileListItem> profile = _db.UserProfiles.
+            IEnumerable<UserProfileListItem> profile = _db.UserProfiles.
                 Select(up => new UserProfileListItem
                 {
                     ProfileId = up.ProfileId,
@@ -48,9 +48,14 @@ namespace To_Gather.Services
                     LastName = up.LastName,
                     FirstName = up.FirstName,
                     CreatedUser = up.CreatedUser,
-                    UsersActivityDisplay = up.UserActivities.Select(ua => new ActivityDisplay
+                    UsersActivityDisplay = up.UserActivities.Select(ua => new UserActivityListItem
                     {
-                        Title = ua.Title
+                        Title = ua.Title,
+                        Activities = ua.UsersActivities.Select(a => new ActivityDisplay
+                        {
+                            ActivityId = a.ActivityId,
+                            Title = a.Title
+                        }).ToList()
                     }).ToList(),
                 }).ToList();
             return profile;

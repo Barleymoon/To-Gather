@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using To_Gather.Data;
 using To_Gather.Models.UserActivityModels;
 using To_Gather.Services;
 
@@ -12,12 +13,13 @@ namespace To_Gather.WebMVC.Controllers
     [Authorize]
     public class UserActivityController : Controller
     {
+        private ApplicationDbContext _db = new ApplicationDbContext();
         // GET: UserActivity
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new UserActivityService(userId);
-            var model = service.GetActivitiesByOwner();
+            var model = service.GetAllUserActivities();
 
             return View(model);
         }
@@ -25,6 +27,7 @@ namespace To_Gather.WebMVC.Controllers
         //GET
         public ActionResult Create()
         {
+            ViewBag.Activities = new SelectList(_db.Activities, "ActivityId", "Title");
             return View();
         }
 
@@ -38,12 +41,20 @@ namespace To_Gather.WebMVC.Controllers
                 return View(model);
             }
 
+            UserActivityService service = CreateUserActivityService();
+
+            if (service.CreateUserActivity(model))
+            {
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        private UserActivityService CreateUserActivityService()
+        {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new UserActivityService(userId);
-
-            service.CreateUserActivity(model);
-
-            return RedirectToAction("Index");
+            return service;
         }
     }
 }

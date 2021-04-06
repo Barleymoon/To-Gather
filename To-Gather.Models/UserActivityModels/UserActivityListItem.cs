@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace To_Gather.Models.UserActivityModels
 {
-    public class UserActivityDisplay
+    public class UserActivityListItem
     {
         public int UserActivityId { get; set; }
         public string Title { get; set; }
-        public List<ActivityDisplay> Activities { get; set; }
+        public IEnumerable<ActivityDisplay> Activities { get; set; }
     }
 }

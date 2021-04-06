@@ -10,6 +10,7 @@ namespace To_Gather.Services
 {
     public class ActivityService
     {
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
         private readonly Guid _userId;
 
         public ActivityService(Guid userId)
@@ -19,96 +20,64 @@ namespace To_Gather.Services
 
         public bool CreateActivity(ActivityCreate model)
         {
-            var entity =
-                new Activity()
-                {
-                    OwnerId = _userId,
-                    Title = model.Title,
-                    Description = model.Description,
-                    Equipment = model.Equipment,
-                    CategoryId = model.CatgoryId
-                };
-            using (var ctx = new ApplicationDbContext())
+            UserProfile userProfile = _db.UserProfiles.Single(up => up.OwnerId == _userId);
+
+            Activity activity = new Activity()
             {
-                ctx.Activities.Add(entity);
-                return ctx.SaveChanges() == 1;
-            }
+                OwnerId = _userId,
+                Title = model.Title,
+                Description = model.Description,
+                Equipment = model.Equipment,
+                CategoryId = model.CatgoryId
+            };
+            _db.Activities.Add(activity);
+            return _db.SaveChanges() == 1;
         }
 
         public IEnumerable<ActivityListItem> GetAllActivities()
         {
-            using (var ctx = new ApplicationDbContext())
+            IEnumerable<ActivityListItem> activities = _db.Activities.Select(a => new ActivityListItem
             {
-                var query =
-                    ctx
-                        .Activities
-                        .Where(a => a.OwnerId == _userId)
-                        .Select(
-                            a =>
-                                new ActivityListItem
-                                {
-                                    ActivityId = a.ActivityId,
-                                    Title = a.Title,
-                                    Description = a.Description,
-                                    Equipment = a.Equipment,
-                                    CategoryId = a.CategoryId
-                                }
-                        );
-                return query.ToArray();
-            }
+                ActivityId = a.ActivityId,
+                Title = a.Title,
+                Description = a.Description,
+                Equipment = a.Equipment,
+                CategoryId = a.CategoryId
+            }).ToList();
+            return activities;
         }
 
         public ActivityDetail GetActivityById(int id)
         {
-            using (var ctx = new ApplicationDbContext())
+            Activity getActivity = _db.Activities.Single(a => a.ActivityId == id);
+            ActivityDetail detail = new ActivityDetail()
             {
-                var entity =
-                    ctx
-                        .Activities
-                        .Single(a => a.ActivityId == id && a.OwnerId == _userId);
-                return new ActivityDetail
-                {
-                    ActivityId = entity.ActivityId,
-                    Title = entity.Title,
-                    Description = entity.Description,
-                    Equipment = entity.Equipment,
-                    CategoryId = entity.CategoryId
-                };
-            }
+                ActivityId = getActivity.ActivityId,
+                Title = getActivity.Title,
+                Description = getActivity.Description,
+                Equipment = getActivity.Equipment,
+                CategoryId = getActivity.CategoryId
+            };
+            return detail;
         }
 
         public bool UpdateActivity(ActivityEdit model)
         {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx
-                        .Activities
-                        .Single(a => a.ActivityId == model.ActivityId && a.OwnerId == _userId);
+            Activity editActivity = _db.Activities.Single(a => a.ActivityId == model.ActivityId);
+            editActivity.ActivityId = model.ActivityId;
+            editActivity.Title = model.Title;
+            editActivity.Description = model.Description;
+            editActivity.Equipment = model.Equipment;
+            editActivity.CategoryId = model.CategoryId;
 
-                entity.ActivityId = model.ActivityId;
-                entity.Title = model.Title;
-                entity.Description = model.Description;
-                entity.Equipment = model.Equipment;
-                entity.CategoryId = model.CategoryId;
-
-                return ctx.SaveChanges() == 1;
-            }
+            return _db.SaveChanges() > 0;
         }
 
-        public bool DeleteActivity(int activityId)
+        public bool DeleteActivity(int id)
         {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var entity =
-                    ctx
-                        .Activities
-                        .Single(a => a.ActivityId == activityId && a.OwnerId == _userId);
-
-                ctx.Activities.Remove(entity);
-
-                return ctx.SaveChanges() == 1;
-            }
+            Activity deleteActivity = _db.Activities.Single(a => a.ActivityId == id);
+            _db.Activities.Remove(deleteActivity);
+            return _db.SaveChanges() == 1;
         }
     }
 }

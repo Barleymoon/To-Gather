@@ -21,9 +21,9 @@ namespace To_Gather.Services
         public bool CreateUserActivity(UserActivityCreate model)
         {
             UserProfile userprofile = _db.UserProfiles.Single(up => up.OwnerId == _userId);
-            List<Activity> allActivities = _db.Activities.ToList();
+            IEnumerable<Activity> allActivities = _db.Activities.ToList();
 
-            UserActivity activity = new UserActivity()
+            UserActivity userActivity = new UserActivity()
             {
                 Title = model.Title,
                 ActivityIds = model.ActivityIds,
@@ -31,13 +31,28 @@ namespace To_Gather.Services
                 ProfileId = userprofile.ProfileId
             };
 
-            _db.UserActivities.Add(activity);
+            _db.UserActivities.Add(userActivity);
             return _db.SaveChanges() > 0;
         }
 
-        public List<UserActivityDisplay> GetActivitiesByOwner()
+        public IEnumerable<UserActivityListItem> GetAllUserActivities()
         {
-            List<UserActivityDisplay> allActivities = _db.UserActivities.Where(ua => ua.OwnerId == _userId)
+            IEnumerable<UserActivityListItem> allActivities = _db.UserActivities.Select(a => new UserActivityListItem
+            {
+                UserActivityId = a.UserActivityId,
+                Title = a.Title,
+                Activities = a.UsersActivities.Select(ua => new ActivityDisplay
+                { 
+                    ActivityId = ua.ActivityId,
+                    Title = ua.Title
+                }).ToList()
+            }).ToList();
+            return allActivities;
+        }
+
+        /*public IEnumerable<UserActivityDisplay> GetActivitiesByOwner()
+        {
+            IEnumerable<UserActivityDisplay> allActivities = _db.UserActivities.Where(ua => ua.OwnerId == _userId)
                 .Select(ua => new UserActivityDisplay
                 {
                     UserActivityId = ua.UserActivityId,
@@ -49,6 +64,6 @@ namespace To_Gather.Services
                     }).ToList()
                 }).ToList();
             return allActivities;
-        }
+        }*/
     }
 }
