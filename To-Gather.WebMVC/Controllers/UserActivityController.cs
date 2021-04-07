@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using To_Gather.Data;
@@ -25,6 +26,7 @@ namespace To_Gather.WebMVC.Controllers
         }
 
         //GET
+        //GET: UserActivity/Create
         public ActionResult Create()
         {
             ViewBag.Activities = new SelectList(_db.Activities, "ActivityId", "Title");
@@ -47,6 +49,61 @@ namespace To_Gather.WebMVC.Controllers
             {
                 return RedirectToAction("Index");
             }
+            return View(model);
+        }
+
+        //GET: Details
+        //UserActivities/Details/{id}
+        public ActionResult Details(int id)
+        {
+            var src = CreateUserActivityService();
+            var model = src.GetUserActivityById(id);
+
+            return View(model);
+        }
+
+        //GET: Edit 
+        //UserActivity/Edit/{id}
+        public ActionResult Edit(int id)
+        {
+            ViewBag.Activities = new SelectList(_db.Activities, "ActivityId", "Title");
+            var src = CreateUserActivityService();
+            var newDetail = src.GetUserActivityById(id);
+            var model =
+                new UserActivityEdit
+                {
+                    UserActivityId = newDetail.UserActivityId,
+                    Title = newDetail.Title,
+                    //Activities = newDetail.Activities,
+                    ActivityIds = newDetail.ActivityIds
+                };
+            return View(model);
+        }
+
+        //POST: 
+        //UserActivity/Edit/{id}
+        [HttpPost]
+        [ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, UserActivityEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.UserActivityId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateUserActivityService();
+
+            if (service.UpdateUserActivity(model))
+            {
+                TempData["SaveResult"] = "This Activity was added!";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "This Activity could not be updated.");
             return View(model);
         }
 

@@ -66,6 +66,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserActivityModels\ActivityDisplay.cs" />
     <Compile Include="UserActivityModels\UserActivityCreate.cs" />
+    <Compile Include="UserActivityModels\UserActivityDetail.cs" />
+    <Compile Include="UserActivityModels\UserActivityEdit.cs" />
     <Compile Include="UserActivityModels\UserActivityListItem.cs" />
     <Compile Include="UserProfileModels\UserProfileCreate.cs" />
     <Compile Include="UserProfileModels\UserProfileDetail.cs" />

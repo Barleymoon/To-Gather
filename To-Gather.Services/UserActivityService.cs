@@ -42,7 +42,7 @@ namespace To_Gather.Services
                 UserActivityId = a.UserActivityId,
                 Title = a.Title,
                 Activities = a.UsersActivities.Select(ua => new ActivityDisplay
-                { 
+                {
                     ActivityId = ua.ActivityId,
                     Title = ua.Title
                 }).ToList()
@@ -50,20 +50,37 @@ namespace To_Gather.Services
             return allActivities;
         }
 
-        /*public IEnumerable<UserActivityDisplay> GetActivitiesByOwner()
+        public UserActivityDetail GetUserActivityById(int id)
         {
-            IEnumerable<UserActivityDisplay> allActivities = _db.UserActivities.Where(ua => ua.OwnerId == _userId)
-                .Select(ua => new UserActivityDisplay
+            UserActivity activityToGet = _db.UserActivities.Single(ua => ua.UserActivityId == id);
+            UserActivityDetail activityDetail = new UserActivityDetail
+            {
+                UserActivityId = activityToGet.UserActivityId,
+                Title = activityToGet.Title,
+                // ActivityIds = activityToGet.ActivityIds,
+                Activities = activityToGet.UsersActivities.Select(a => new ActivityDisplay
                 {
-                    UserActivityId = ua.UserActivityId,
-                    Title = ua.Title,
-                    Activities = ua.UsersActivities.Select(ad => new ActivityDisplay
-                    {
-                        ActivityId = ad.ActivityId,
-                        Title = ad.Title
-                    }).ToList()
-                }).ToList();
-            return allActivities;
-        }*/
+                    ActivityId = a.ActivityId,
+                    Title = a.Title
+                }).ToList()
+            };
+            return activityDetail;
+        }
+
+        public bool UpdateUserActivity(UserActivityEdit model)
+        {
+            UserActivity editActivity = _db.UserActivities.Single(ua => ua.UserActivityId == model.UserActivityId);
+            editActivity.Title = model.Title;
+            editActivity.ActivityIds = model.ActivityIds;
+            editActivity.UsersActivities = _db.Activities.Where(ua => model.ActivityIds.Contains(ua.ActivityId)).ToList();
+
+            IEnumerable<Activity> activityRemove = _db.Activities.Where(ua => !model.ActivityIds.Contains(ua.ActivityId)).ToList();
+            foreach (Activity activity in activityRemove)
+            {
+                editActivity.UsersActivities.Remove(activity);
+            }
+
+            return _db.SaveChanges() == 1;
+        }
     }
 }

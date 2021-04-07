@@ -255,6 +255,8 @@
     <Content Include="Views\UserProfile\Delete.cshtml" />
     <Content Include="Views\UserActivity\Index.cshtml" />
     <Content Include="Views\UserActivity\Create.cshtml" />
+    <Content Include="Views\UserActivity\Details.cshtml" />
+    <Content Include="Views\UserActivity\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
