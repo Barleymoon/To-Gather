@@ -28,7 +28,7 @@ namespace To_Gather.Services
                 Title = model.Title,
                 Description = model.Description,
                 Equipment = model.Equipment,
-                CategoryId = model.CatgoryId
+                CategoryId = model.CategoryId
             };
             _db.Activities.Add(activity);
             return _db.SaveChanges() == 1;
@@ -36,7 +36,7 @@ namespace To_Gather.Services
 
         public IEnumerable<ActivityListItem> GetAllActivities()
         {
-            IEnumerable<ActivityListItem> activities = _db.Activities.Select(a => new ActivityListItem
+            List<ActivityListItem> activities = _db.Activities.Select(a => new ActivityListItem
             {
                 ActivityId = a.ActivityId,
                 Title = a.Title,

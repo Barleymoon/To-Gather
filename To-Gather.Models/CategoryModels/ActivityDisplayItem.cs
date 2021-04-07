@@ -14,8 +14,8 @@ namespace To_Gather.Models.CategoryModels
         [Display(Name ="Activity Title")]
         public string Title { get; set; }
 
-        [Display(Name = "Activity Description")]
-        public string Description { get; set; }
+        /*[Display(Name = "Activity Description")]
+        public string Description { get; set; }*/
         // public string Equipment { get; set; }
     }
 }

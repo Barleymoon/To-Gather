@@ -57,33 +57,9 @@
     <Compile Include="Activity.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202103301741558_InitialCreate.cs" />
-    <Compile Include="Migrations\202103301741558_InitialCreate.Designer.cs">
-      <DependentUpon>202103301741558_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202103301927422_First.cs" />
-    <Compile Include="Migrations\202103301927422_First.Designer.cs">
-      <DependentUpon>202103301927422_First.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104011742236_Second.cs" />
-    <Compile Include="Migrations\202104011742236_Second.Designer.cs">
-      <DependentUpon>202104011742236_Second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104011812443_Typo.cs" />
-    <Compile Include="Migrations\202104011812443_Typo.Designer.cs">
-      <DependentUpon>202104011812443_Typo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104051454372_Updated.cs" />
-    <Compile Include="Migrations\202104051454372_Updated.Designer.cs">
-      <DependentUpon>202104051454372_Updated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104051517077_UserProfile.cs" />
-    <Compile Include="Migrations\202104051517077_UserProfile.Designer.cs">
-      <DependentUpon>202104051517077_UserProfile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202104052019001_AddedUserActivity.cs" />
-    <Compile Include="Migrations\202104052019001_AddedUserActivity.Designer.cs">
-      <DependentUpon>202104052019001_AddedUserActivity.cs</DependentUpon>
+    <Compile Include="Migrations\202104071748149_ThisMigration.cs" />
+    <Compile Include="Migrations\202104071748149_ThisMigration.Designer.cs">
+      <DependentUpon>202104071748149_ThisMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,26 +71,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202103301741558_InitialCreate.resx">
-      <DependentUpon>202103301741558_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202103301927422_First.resx">
-      <DependentUpon>202103301927422_First.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104011742236_Second.resx">
-      <DependentUpon>202104011742236_Second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104011812443_Typo.resx">
-      <DependentUpon>202104011812443_Typo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104051454372_Updated.resx">
-      <DependentUpon>202104051454372_Updated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104051517077_UserProfile.resx">
-      <DependentUpon>202104051517077_UserProfile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104052019001_AddedUserActivity.resx">
-      <DependentUpon>202104052019001_AddedUserActivity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202104071748149_ThisMigration.resx">
+      <DependentUpon>202104071748149_ThisMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,7 +10,6 @@ namespace To_Gather.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "To_Gather.Data.ApplicationDbContext";
         }
 
         protected override void Seed(To_Gather.Data.ApplicationDbContext context)

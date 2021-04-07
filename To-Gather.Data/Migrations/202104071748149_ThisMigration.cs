@@ -3,17 +3,35 @@ namespace To_Gather.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class ThisMigration : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Activity",
+                c => new
+                {
+                    ActivityId = c.Int(nullable: false, identity: true),
+                    OwnerId = c.Guid(nullable: false),
+                    Title = c.String(nullable: false),
+                    Description = c.String(nullable: false, maxLength: 150),
+                    Equipment = c.String(nullable: false),
+                    CategoryId = c.Int(nullable: false),
+                    UserActivity_UserActivityId = c.Int(),
+                })
+                .PrimaryKey(t => t.ActivityId)
+                .ForeignKey("dbo.Category", t => t.CategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.UserActivity", t => t.UserActivity_UserActivityId)
+                .Index(t => t.CategoryId)
+                .Index(t => t.UserActivity_UserActivityId);
+            
             CreateTable(
                 "dbo.Category",
                 c => new
                     {
                         CategoryId = c.Int(nullable: false, identity: true),
                         OwnerId = c.Guid(nullable: false),
-                        Name = c.String(nullable: false),
+                        Title = c.String(nullable: false),
                         Description = c.String(nullable: false, maxLength: 100),
                     })
                 .PrimaryKey(t => t.CategoryId);
@@ -41,6 +59,34 @@ namespace To_Gather.Data.Migrations
                 .ForeignKey("dbo.ApplicationUser", t => t.ApplicationUser_Id)
                 .Index(t => t.IdentityRole_Id)
                 .Index(t => t.ApplicationUser_Id);
+            
+            CreateTable(
+                "dbo.UserActivity",
+                c => new
+                    {
+                        UserActivityId = c.Int(nullable: false, identity: true),
+                        Title = c.String(),
+                        OwnerId = c.Guid(nullable: false),
+                        ProfileId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.UserActivityId)
+                .ForeignKey("dbo.UserProfile", t => t.ProfileId, cascadeDelete: true)
+                .Index(t => t.ProfileId);
+            
+            CreateTable(
+                "dbo.UserProfile",
+                c => new
+                    {
+                        ProfileId = c.Int(nullable: false, identity: true),
+                        OwnerId = c.Guid(nullable: false),
+                        UserName = c.String(nullable: false),
+                        FirstName = c.String(nullable: false),
+                        LastName = c.String(nullable: false),
+                        Age = c.Int(nullable: false),
+                        Email = c.String(),
+                        CreatedUser = c.DateTimeOffset(nullable: false, precision: 7),
+                    })
+                .PrimaryKey(t => t.ProfileId);
             
             CreateTable(
                 "dbo.ApplicationUser",
@@ -95,17 +141,26 @@ namespace To_Gather.Data.Migrations
             DropForeignKey("dbo.IdentityUserRole", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
+            // DropForeignKey("dbo.Activity", "UserActivity_UserActivityId", "dbo.UserActivity");
+            DropForeignKey("dbo.UserActivity", "ProfileId", "dbo.UserProfile");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
+            DropForeignKey("dbo.Activity", "CategoryId", "dbo.Category");
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
+            DropIndex("dbo.UserActivity", new[] { "ProfileId" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
+            DropIndex("dbo.Activity", new[] { "UserActivity_UserActivityId" });
+            DropIndex("dbo.Activity", new[] { "CategoryId" });
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");
             DropTable("dbo.ApplicationUser");
+            DropTable("dbo.UserProfile");
+            DropTable("dbo.UserActivity");
             DropTable("dbo.IdentityUserRole");
             DropTable("dbo.IdentityRole");
             DropTable("dbo.Category");
+            DropTable("dbo.Activity");
         }
     }
 }

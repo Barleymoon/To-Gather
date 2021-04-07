@@ -29,6 +29,7 @@ namespace To_Gather.WebMVC.Controllers
         //GET: UserActivity/Create
         public ActionResult Create()
         {
+            ViewBag.UserActivities = new SelectList(_db.UserActivities, "ActivityIds", "Title");
             ViewBag.Activities = new SelectList(_db.Activities, "ActivityId", "Title");
             return View();
         }
@@ -66,6 +67,7 @@ namespace To_Gather.WebMVC.Controllers
         //UserActivity/Edit/{id}
         public ActionResult Edit(int id)
         {
+            //ViewBag.UserActivities = new SelectList(_db.UserActivities, "ActivityIds", "Title");
             ViewBag.Activities = new SelectList(_db.Activities, "ActivityId", "Title");
             var src = CreateUserActivityService();
             var newDetail = src.GetUserActivityById(id);
@@ -105,6 +107,29 @@ namespace To_Gather.WebMVC.Controllers
 
             ModelState.AddModelError("", "This Activity could not be updated.");
             return View(model);
+        }
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var src = CreateUserActivityService();
+            var model = src.GetUserActivityById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteUserActivity(int id)
+        {
+            var service = CreateUserActivityService();
+
+            service.DeleteUserActivity(id);
+
+            TempData["SaveResult"] = "This activity was deleted from your profile.";
+
+            return RedirectToAction("Index");
         }
 
         private UserActivityService CreateUserActivityService()

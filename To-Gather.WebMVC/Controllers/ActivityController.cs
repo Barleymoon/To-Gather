@@ -13,7 +13,7 @@ namespace To_Gather.WebMVC.Controllers
     [Authorize]
     public class ActivityController : Controller
     {
-        private ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
         // GET: Activity
         public ActionResult Index()
         {

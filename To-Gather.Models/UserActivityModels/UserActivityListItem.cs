@@ -10,6 +10,6 @@ namespace To_Gather.Models.UserActivityModels
     {
         public int UserActivityId { get; set; }
         public string Title { get; set; }
-        public IEnumerable<ActivityDisplay> Activities { get; set; }
+        public List<ActivityDisplay> Activities { get; set; }
     }
 }

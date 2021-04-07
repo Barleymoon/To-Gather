@@ -27,7 +27,7 @@
         @Html.LabelFor(model => model.ActivityIds, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("ActivityIds",(IEnumerable<SelectListItem>)ViewBag.Activities,"Select Activity")
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.ActivityIds, "", new { @class = "text-danger" })
         </div>
     </div>
 

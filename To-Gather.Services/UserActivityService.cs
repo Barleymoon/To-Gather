@@ -21,7 +21,7 @@ namespace To_Gather.Services
         public bool CreateUserActivity(UserActivityCreate model)
         {
             UserProfile userprofile = _db.UserProfiles.Single(up => up.OwnerId == _userId);
-            IEnumerable<Activity> allActivities = _db.Activities.ToList();
+            List<Activity> allActivities = _db.Activities.ToList();
 
             UserActivity userActivity = new UserActivity()
             {
@@ -35,9 +35,9 @@ namespace To_Gather.Services
             return _db.SaveChanges() > 0;
         }
 
-        public IEnumerable<UserActivityListItem> GetAllUserActivities()
+        public List<UserActivityListItem> GetAllUserActivities()
         {
-            IEnumerable<UserActivityListItem> allActivities = _db.UserActivities.Select(a => new UserActivityListItem
+            List<UserActivityListItem> allActivities = _db.UserActivities.Select(a => new UserActivityListItem
             {
                 UserActivityId = a.UserActivityId,
                 Title = a.Title,
@@ -74,13 +74,20 @@ namespace To_Gather.Services
             editActivity.ActivityIds = model.ActivityIds;
             editActivity.UsersActivities = _db.Activities.Where(ua => model.ActivityIds.Contains(ua.ActivityId)).ToList();
 
-            IEnumerable<Activity> activityRemove = _db.Activities.Where(ua => !model.ActivityIds.Contains(ua.ActivityId)).ToList();
+            List<Activity> activityRemove = _db.Activities.Where(ua => !model.ActivityIds.Contains(ua.ActivityId)).ToList();
             foreach (Activity activity in activityRemove)
             {
                 editActivity.UsersActivities.Remove(activity);
             }
 
             return _db.SaveChanges() == 1;
+        }
+
+        public bool DeleteUserActivity(int id)
+        {
+            UserActivity deleteActivity = _db.UserActivities.Single(ua => ua.UserActivityId == id);
+            _db.UserActivities.Remove(deleteActivity);
+            return _db.SaveChanges() > 0;
         }
     }
 }
