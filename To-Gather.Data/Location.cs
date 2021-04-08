@@ -11,6 +11,11 @@ namespace To_Gather.Data
     {
         [Key]
         public int LocationId { get; set; }
+        public Guid OwnerId { get; set; }
+        
+        [Required]
+        [Display(Name = "Location Title")]
+        public string Title { get; set; }
 
         [Required]
         public string StreetAddress { get; set; }
@@ -22,8 +27,8 @@ namespace To_Gather.Data
         [Display(Name ="Weather")]
         public string Weather { get; set; }
 
-        [Required]
-        public TimeZone TimeZone { get; set; }
+        /*[Required]
+        public TimeZone TimeZone { get; set; }*/
         
         [Required]
         public string Terrain { get; set; }

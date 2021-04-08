@@ -171,6 +171,7 @@
     <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserActivityController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
@@ -258,6 +259,9 @@
     <Content Include="Views\UserActivity\Details.cshtml" />
     <Content Include="Views\UserActivity\Edit.cshtml" />
     <Content Include="Views\UserActivity\Delete.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Location\Create.cshtml" />
+    <Content Include="Views\Location\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

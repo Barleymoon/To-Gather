@@ -7,26 +7,21 @@ using System.Threading.Tasks;
 
 namespace To_Gather.Models.LocationModels
 {
-    public class LocationCreate
+    public class LocationDetail
     {
-        [Required]
-        public string StreetAddress { get; set; }
+        public int LocationId { get; set; }
 
-        [Required]
         [Display(Name = "Location Title")]
         public string Title { get; set; }
+        [Display(Name = "Address")]
 
-        [Required]
+        public string StreetAddress { get; set; }
+
         [MaxLength(100, ErrorMessage = "Description must be under 100 characters.")]
         public string Description { get; set; }
 
         [Display(Name = "Weather")]
         public string Weather { get; set; }
-
-        /*[Required]
-        public TimeZone TimeZone { get; set; }*/
-
-        [Required]
         public string Terrain { get; set; }
     }
 }

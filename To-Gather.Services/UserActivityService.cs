@@ -25,6 +25,7 @@ namespace To_Gather.Services
 
             UserActivity userActivity = new UserActivity()
             {
+                OwnerId = _userId,
                 Title = model.Title,
                 ActivityIds = model.ActivityIds,
                 UsersActivities = allActivities.Where(a => model.ActivityIds.Contains(a.ActivityId)).ToList(),
