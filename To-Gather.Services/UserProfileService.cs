@@ -22,7 +22,7 @@ namespace To_Gather.Services
 
         public bool CreateUser(UserProfileCreate model)
         {
-            // List<Activity> allActivities = _db.Activities.ToList();
+            List<Activity> allActivities = _db.Activities.ToList();
 
             UserProfile userProfile = new UserProfile()
             {
@@ -32,7 +32,7 @@ namespace To_Gather.Services
                 LastName = model.LastName,
                 Age = model.Age,
                 Email = model.Email,
-                // UserActivities = (ICollection<UserActivity>)allActivities.Where(ua => model.ActivityIds.Contains(ua.ActivityId)).ToList()
+                UserActivities = (ICollection<UserActivity>)allActivities.Where(ua => model.ActivityIds.Contains(ua.ActivityId)).ToList()
             };
             _db.UserProfiles.Add(userProfile);
             return _db.SaveChanges() > 0;

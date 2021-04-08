@@ -63,6 +63,7 @@
     <Compile Include="CategoryModels\CategoryDetail.cs" />
     <Compile Include="CategoryModels\CategoryEdit.cs" />
     <Compile Include="CategoryModels\CategoryListItem.cs" />
+    <Compile Include="LocationModels\LocationCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserActivityModels\ActivityDisplay.cs" />
     <Compile Include="UserActivityModels\UserActivityCreate.cs" />
