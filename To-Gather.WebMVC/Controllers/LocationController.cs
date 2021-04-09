@@ -22,11 +22,13 @@ namespace To_Gather.WebMVC.Controllers
             return View(model);
         }
 
+        //GET: Create
         public ActionResult Create()
         {
             return View();
         }
 
+        // POST: Location/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(LocationCreate model)
@@ -45,6 +47,7 @@ namespace To_Gather.WebMVC.Controllers
             return View(model);
         }
 
+        //GET: Details/Location/{id}
         public ActionResult Details(int id)
         {
             var src = CreateLocationService();
@@ -52,6 +55,50 @@ namespace To_Gather.WebMVC.Controllers
 
             return View(model);
         }
+
+        //GET: Edit
+        public ActionResult Edit(int id)
+        {
+            var service = CreateLocationService();
+            var detail = service.GetLocationById(id);
+            var model =
+                new LocationEdit
+                {
+                    LocationId = detail.LocationId,
+                    StreetAddress = detail.StreetAddress,
+                    Title = detail.Title,
+                    Description = detail.Description,
+                    Terrain = detail.Terrain,
+                    Weather = detail.Weather,
+                };
+            return View(model);
+        }
+
+        //POST: Location/Edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, LocationEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.LocationId != id)
+            {
+                ModelState.AddModelError("", "Id Mistmatch");
+                return View(model);
+            }
+
+            var service = CreateLocationService();
+
+            if (service.UpdateLocation(model))
+            {
+                TempData["SaveResult"] = "This Location has been updated!";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "This Location could not be updated at this time.");
+            return View(model);
+        }
+
 
         private LocationService CreateLocationService()
         {

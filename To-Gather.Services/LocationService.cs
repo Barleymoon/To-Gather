@@ -62,5 +62,25 @@ namespace To_Gather.Services
             };
             return locationDetail;
         }
+
+        public bool UpdateLocation(LocationEdit model)
+        {
+            Location editLocation = _db.Locations.Single(l => l.LocationId == model.LocationId);
+            editLocation.LocationId = model.LocationId;
+            editLocation.StreetAddress = model.StreetAddress;
+            editLocation.Title = model.Title;
+            editLocation.Description = model.Description;
+            editLocation.Terrain = model.Terrain;
+            editLocation.Weather = model.Weather;
+
+            return _db.SaveChanges() > 0;
+        }
+
+        /*public bool DeleteLocation(int id)
+        {
+            Location deleteLocation = _db.Locations.Single(l => l.LocationId == id);
+            _db.Locations.Remove(deleteLocation);
+            return _db.SaveChanges() == 1;
+        }*/
     }
 }
