@@ -63,6 +63,8 @@
     <Compile Include="CategoryModels\CategoryDetail.cs" />
     <Compile Include="CategoryModels\CategoryEdit.cs" />
     <Compile Include="CategoryModels\CategoryListItem.cs" />
+    <Compile Include="EventModels\EventListItem.cs" />
+    <Compile Include="EventModels\EventCreate.cs" />
     <Compile Include="LocationModels\LocationCreate.cs" />
     <Compile Include="LocationModels\LocationDetail.cs" />
     <Compile Include="LocationModels\LocationEdit.cs" />

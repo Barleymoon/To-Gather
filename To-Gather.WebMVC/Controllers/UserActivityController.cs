@@ -44,12 +44,15 @@ namespace To_Gather.WebMVC.Controllers
                 return View(model);
             }
 
-            UserActivityService service = CreateUserActivityService();
+            var service = CreateUserActivityService();
 
             if (service.CreateUserActivity(model))
             {
+                TempData["Save Result"] = "This Activity has been added to your profile!";
                 return RedirectToAction("Index");
             }
+
+            ModelState.AddModelError("", "This Activity could not be added to your profile..");
             return View(model);
         }
 
@@ -101,7 +104,7 @@ namespace To_Gather.WebMVC.Controllers
 
             if (service.UpdateUserActivity(model))
             {
-                TempData["SaveResult"] = "This Activity was added!";
+                TempData["SaveResult"] = "This Activity was updated!";
                 return RedirectToAction("Index");
             }
 
