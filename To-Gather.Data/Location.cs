@@ -28,7 +28,8 @@ namespace To_Gather.Data
         public string Weather { get; set; }
 
         /*[Required]
-        public TimeZone TimeZone { get; set; }*/
+        [Display(Name ="Zip Code")]
+        public string ZipCode { get; set; }*/
         
         [Required]
         public string Terrain { get; set; }

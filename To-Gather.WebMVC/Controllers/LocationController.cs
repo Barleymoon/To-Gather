@@ -100,6 +100,31 @@ namespace To_Gather.WebMVC.Controllers
         }
 
 
+        //GET: Delete 
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var src = CreateLocationService();
+            var model = src.GetLocationById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteLocation(int id)
+        {
+            var service = CreateLocationService();
+
+            service.DeleteLocation(id);
+
+            TempData["SaveResult"] = "This Location has been deleted from your profile.";
+
+            return RedirectToAction("Index");
+        }
+
+
         private LocationService CreateLocationService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

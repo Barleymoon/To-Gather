@@ -76,11 +76,11 @@ namespace To_Gather.Services
             return _db.SaveChanges() > 0;
         }
 
-        /*public bool DeleteLocation(int id)
+        public bool DeleteLocation(int id)
         {
             Location deleteLocation = _db.Locations.Single(l => l.LocationId == id);
             _db.Locations.Remove(deleteLocation);
             return _db.SaveChanges() == 1;
-        }*/
+        }
     }
 }
