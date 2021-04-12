@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using To_Gather.Data;
 using To_Gather.Models.ActivityModels;
+using To_Gather.Models.UsersActivityModels;
 using To_Gather.Services;
 
 namespace To_Gather.WebMVC.Controllers
@@ -126,6 +127,33 @@ namespace To_Gather.WebMVC.Controllers
             TempData["SaveResult"] = "This activity was deleted";
 
             return RedirectToAction("Index");
+        }
+
+        //GET: Join
+        public ActionResult Join()
+        {
+            return View();
+        }
+
+
+        //POST: Join
+        [ActionName("Join")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Join(UsersActivityCreate model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var service = CreateActivityService();
+
+            if (service.JoinActivityToUsersActivity(model))
+            {
+                TempData["SaveResult"] = "This activity has been added to your profile.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "This activity could not be added to your profile.");
+            return View(model);
         }
 
         private ActivityService CreateActivityService()

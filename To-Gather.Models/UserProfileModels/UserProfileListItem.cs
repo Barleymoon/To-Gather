@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using To_Gather.Models.UserActivityModels;
+// using To_Gather.Models.UsersActivityModels;
 
 namespace To_Gather.Models.UserProfileModels
 {

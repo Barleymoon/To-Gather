@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using To_Gather.Data;
 using To_Gather.Models.ActivityModels;
+using To_Gather.Models.UsersActivityModels;
 
 namespace To_Gather.Services
 {
@@ -73,10 +74,24 @@ namespace To_Gather.Services
             return _db.SaveChanges() > 0;
         }
 
+
         public bool DeleteActivity(int id)
         {
             Activity deleteActivity = _db.Activities.Single(a => a.ActivityId == id);
             _db.Activities.Remove(deleteActivity);
+            return _db.SaveChanges() == 1;
+        }
+
+        public bool JoinActivityToUsersActivity(UsersActivityCreate model)
+        {
+            UserProfile userProfile = _db.UserProfiles.Single(up => up.OwnerId == _userId);
+
+            UsersActivity usersActivity = new UsersActivity()
+            {
+                ActivityId = model.ActivityId,
+                ProfileId = model.ProfileId
+            };
+            _db.UsersActivities.Add(usersActivity);
             return _db.SaveChanges() == 1;
         }
     }

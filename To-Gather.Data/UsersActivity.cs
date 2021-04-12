@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace To_Gather.Data
 {
-    public class UserActivity
+    public class UsersActivity
     {
         [Key]
-        public int UserActivityId { get; set; }
+        public int UsersActivityId { get; set; }
         public Guid OwnerId { get; set; }
 
 
         [ForeignKey(nameof(Activity))]
         public int ActivityId { get; set; }
-        public virtual Activity UsersActivities { get; set; }
+        public virtual Activity Activity { get; set; }
 
 
         [ForeignKey(nameof(UserProfile))]

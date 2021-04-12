@@ -76,6 +76,9 @@
     <Compile Include="UserProfileModels\UserProfileDetail.cs" />
     <Compile Include="UserProfileModels\UserProfileEdit.cs" />
     <Compile Include="UserProfileModels\UserProfileListItem.cs" />
+    <Compile Include="UsersActivityModels\UsersActivityDetail.cs" />
+    <Compile Include="UsersActivityModels\UsersActivityCreate.cs" />
+    <Compile Include="UsersActivityModels\UsersActivityListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

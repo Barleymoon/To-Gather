@@ -32,7 +32,7 @@ namespace To_Gather.Services
                 LastName = model.LastName,
                 Age = model.Age,
                 Email = model.Email,
-                UserActivities = (ICollection<UserActivity>)allActivities.Where(ua => model.ActivityIds.Contains(ua.ActivityId)).ToList()
+                // UsersActivities = allActivities.Where(ua => model.ActivityIds.Contains(ua.ActivityId)).ToList()
             };
             _db.UserProfiles.Add(userProfile);
             return _db.SaveChanges() > 0;
@@ -64,7 +64,7 @@ namespace To_Gather.Services
         public UserProfileDetail GetProfileById(int id)
         {
             UserProfile getProfile = _db.UserProfiles.Single(up => up.ProfileId == id);
-            List<int> allActivityIds = _db.UserActivities.Where(a => a.ProfileId == getProfile.ProfileId).Select(a => a.ActivityId).ToList();
+            List<int> allActivityIds = _db.UsersActivities.Where(a => a.ProfileId == getProfile.ProfileId).Select(a => a.ActivityId).ToList();
             List<ActivityDetail> activityDetails = GetActivityDetailsByProfileIds(allActivityIds);
             UserProfileDetail profileDetail = new UserProfileDetail()
             {
@@ -94,7 +94,7 @@ namespace To_Gather.Services
         public List<ActivityDetail> GetActivityDetailsByProfileIds(List<int> allActivityIds)
         {
             UserProfile getProfile = _db.UserProfiles.Single(up => up.OwnerId == _userId);
-            List<int> allActivityId = _db.UserActivities.Where(a => a.ProfileId == getProfile.ProfileId).Select(a => a.ActivityId).ToList();
+            List<int> allActivityId = _db.UsersActivities.Where(a => a.ProfileId == getProfile.ProfileId).Select(a => a.ActivityId).ToList();
             List<ActivityDetail> myActivity = new List<ActivityDetail>();
 
             foreach (var activity in myActivity)

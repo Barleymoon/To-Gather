@@ -29,6 +29,6 @@ namespace To_Gather.Data
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
-        public virtual List<UserActivity> UserActivities { get; set; } = new List<UserActivity>();
+        public virtual List<UsersActivity> UsersActivities { get; set; } = new List<UsersActivity>();
     }
 }

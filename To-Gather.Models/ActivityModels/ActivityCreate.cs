@@ -18,6 +18,7 @@ namespace To_Gather.Models.ActivityModels
 
         [Required]
         public string Equipment { get; set; }
+        
         [Required]
         public int CategoryId { get; set; }
     }

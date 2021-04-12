@@ -60,6 +60,7 @@
     <Compile Include="LocationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserProfileService.cs" />
+    <Compile Include="UsersActivityService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
