@@ -23,7 +23,7 @@ namespace To_Gather.Models.EventModels
         [DataType(DataType.DateTime)]
         // [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date Of Event")]
-        public DateTimeOffset EventTime { get; set; }
+        public DateTime EventTime { get; set; }
 
         [Required]
         [Display(Name = "Must be over 21 to attend")]

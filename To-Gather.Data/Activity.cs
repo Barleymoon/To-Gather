@@ -28,5 +28,7 @@ namespace To_Gather.Data
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+
+        public virtual List<UserActivity> UserActivities { get; set; } = new List<UserActivity>();
     }
 }

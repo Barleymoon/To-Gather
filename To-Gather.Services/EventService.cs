@@ -27,7 +27,7 @@ namespace To_Gather.Services
                 OwnerId = _userId,
                 Title = model.Title,
                 Description = model.Description,
-                EventTime = DateTimeOffset.Now,
+                EventTime = DateTime.Now,
                 IsOfAge = model.IsOfAge,
                 ActivityId = model.ActivityId,
                 LocationId = model.LocationId

@@ -71,6 +71,10 @@
     <Compile Include="Migrations\202104101550479_EventAdded.Designer.cs">
       <DependentUpon>202104101550479_EventAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104121731066_AddJoiningtable.cs" />
+    <Compile Include="Migrations\202104121731066_AddJoiningtable.Designer.cs">
+      <DependentUpon>202104121731066_AddJoiningtable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserActivity.cs" />
@@ -89,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104101550479_EventAdded.resx">
       <DependentUpon>202104101550479_EventAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104121731066_AddJoiningtable.resx">
+      <DependentUpon>202104121731066_AddJoiningtable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

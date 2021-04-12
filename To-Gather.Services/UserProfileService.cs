@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using To_Gather.Data;
-using To_Gather.Models.UserActivityModels;
+using To_Gather.Models.ActivityModels;
 using To_Gather.Models.UserModels;
 using To_Gather.Models.UserProfileModels;
 
@@ -48,7 +48,7 @@ namespace To_Gather.Services
                     LastName = up.LastName,
                     FirstName = up.FirstName,
                     CreatedUser = up.CreatedUser,
-                    UsersActivityDisplay = up.UserActivities.Select(ua => new UserActivityListItem
+                    /*UsersActivityDisplay = up.UserActivities.Select(ua => new UserActivityListItem
                     {
                         Title = ua.Title,
                         Activities = ua.UsersActivities.Select(a => new ActivityDisplay
@@ -56,7 +56,7 @@ namespace To_Gather.Services
                             ActivityId = a.ActivityId,
                             Title = a.Title
                         }).ToList()
-                    }).ToList(),
+                    }).ToList(),*/
                 }).ToList();
             return profile;
         }
@@ -64,6 +64,8 @@ namespace To_Gather.Services
         public UserProfileDetail GetProfileById(int id)
         {
             UserProfile getProfile = _db.UserProfiles.Single(up => up.ProfileId == id);
+            List<int> allActivityIds = _db.UserActivities.Where(a => a.ProfileId == getProfile.ProfileId).Select(a => a.ActivityId).ToList();
+            List<ActivityDetail> activityDetails = GetActivityDetailsByProfileIds(allActivityIds);
             UserProfileDetail profileDetail = new UserProfileDetail()
             {
                 ProfileId = getProfile.ProfileId,
@@ -72,11 +74,38 @@ namespace To_Gather.Services
                 LastName = getProfile.LastName,
                 Age = getProfile.Age,
                 CreatedUser = getProfile.CreatedUser,
-                Email = getProfile.Email
+                Email = getProfile.Email,
+                Activities = activityDetails
             };
 
             return profileDetail;
         }
+
+        /*public ActivityDetail GetActivityDetailsByProfileIds()
+        {
+            List<int> allActivityIds = _db.UserActivities.Where(a => a.ProfileId == ProfileId).Select(a => a.ActivityId).ToList();
+
+            foreach (Activity activityId in allActivityIds)
+            {
+                return new ActivityDetail();
+            }
+        }*/
+
+        public List<ActivityDetail> GetActivityDetailsByProfileIds(List<int> allActivityIds)
+        {
+            UserProfile getProfile = _db.UserProfiles.Single(up => up.OwnerId == _userId);
+            List<int> allActivityId = _db.UserActivities.Where(a => a.ProfileId == getProfile.ProfileId).Select(a => a.ActivityId).ToList();
+            List<ActivityDetail> myActivity = new List<ActivityDetail>();
+
+            foreach (var activity in myActivity)
+            {
+                return new List<ActivityDetail>();
+            }
+            
+            return myActivity;
+        }
+
+
 
         public bool UpdateUserProfile(UserProfileEdit model)
         {

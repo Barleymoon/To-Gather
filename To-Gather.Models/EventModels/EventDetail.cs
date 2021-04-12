@@ -14,7 +14,7 @@ namespace To_Gather.Models.EventModels
         public string Description { get; set; }
 
         [Display(Name ="Date of Event")]
-        public DateTimeOffset EventTime { get; set; }
+        public DateTime EventTime { get; set; }
 
         [Display(Name = "Must be over 21 to attend")]
         public bool IsOfAge { get; set; }

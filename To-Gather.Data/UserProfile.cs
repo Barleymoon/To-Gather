@@ -32,7 +32,7 @@ namespace To_Gather.Data
         [Display(Name ="User Created")]
         public DateTimeOffset CreatedUser { get; set; }
 
-        public virtual ICollection<UserActivity> UserActivities { get; set; } = new List<UserActivity>();
+        public virtual List<UserActivity> UserActivities { get; set; } = new List<UserActivity>();
         // public List<UserEvent> UserEvents { get; set; }
     }
 }

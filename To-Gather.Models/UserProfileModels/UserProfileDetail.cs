@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using To_Gather.Data;
+using To_Gather.Models.ActivityModels;
 
 namespace To_Gather.Models.UserProfileModels
 {
@@ -18,9 +20,9 @@ namespace To_Gather.Models.UserProfileModels
         public DateTimeOffset CreatedUser { get; set; }
         public int Age { get; set; }
         public string Email { get; set; }
-        public List<int> ActivityIds { get; set; }
+        // public List<int> ActivityIds { get; set; }
 
-        // public List<UserActivity> UserActivities { get; set; }
+        public List<ActivityDetail> Activities { get; set; }
         
         // public List<UserEvent> UserEvents { get; set; }
     }

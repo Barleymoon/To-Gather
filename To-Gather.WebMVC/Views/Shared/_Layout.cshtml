@@ -36,10 +36,6 @@
                     }
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("UserActivities", "Index", "UserActivity")</li>
-                    }
-                    @if (User.Identity.IsAuthenticated)
-                    {
                         <li>@Html.ActionLink("Locations", "Index", "Location")</li>
                     }
                     @if (User.Identity.IsAuthenticated)

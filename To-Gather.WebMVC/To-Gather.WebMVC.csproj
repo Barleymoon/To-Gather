@@ -174,7 +174,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\UserActivityController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -255,11 +254,6 @@
     <Content Include="Views\UserProfile\Details.cshtml" />
     <Content Include="Views\UserProfile\Edit.cshtml" />
     <Content Include="Views\UserProfile\Delete.cshtml" />
-    <Content Include="Views\UserActivity\Index.cshtml" />
-    <Content Include="Views\UserActivity\Create.cshtml" />
-    <Content Include="Views\UserActivity\Details.cshtml" />
-    <Content Include="Views\UserActivity\Edit.cshtml" />
-    <Content Include="Views\UserActivity\Delete.cshtml" />
     <Content Include="Views\Location\Index.cshtml" />
     <Content Include="Views\Location\Create.cshtml" />
     <Content Include="Views\Location\Details.cshtml" />

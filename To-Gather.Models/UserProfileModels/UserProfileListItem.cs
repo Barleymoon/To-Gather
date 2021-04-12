@@ -17,7 +17,6 @@ namespace To_Gather.Models.UserProfileModels
 
         [Display(Name ="Created User")]
         public DateTimeOffset CreatedUser { get; set; }
-        public List<UserActivityListItem> UsersActivityDisplay { get; set; }
         //public List<UserActivity> UserActivities { get; set; }
         // public List<UserEvent> UserEvents { get; set; }
     }
