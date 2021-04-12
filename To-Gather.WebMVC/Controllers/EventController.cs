@@ -53,6 +53,89 @@ namespace To_Gather.WebMVC.Controllers
             return View(model);
         }
 
+        //GET: Details
+        public ActionResult Details(int id)
+        {
+            var src = CreateEventService();
+            var model = src.GetEventById(id);
+
+            return View(model);
+        }
+
+        //GET: Edit
+        //Event/Edit/{id}
+        public ActionResult Edit(int id)
+        {
+            ViewBag.Activities = new SelectList(_db.Activities, "ActivityId", "Title");
+            ViewBag.Locations = new SelectList(_db.Locations, "LocationId", "Title");
+            var src = CreateEventService();
+            var detailNew = src.GetEventById(id);
+            var model =
+                new EventEdit
+                {
+                    EventId = detailNew.EventId,
+                    Title = detailNew.Title,
+                    Description = detailNew.Description,
+                    EventTime = detailNew.EventTime,
+                    IsOfAge = detailNew.IsOfAge,
+                    ActivityId = detailNew.ActivityId,
+                    LocationId = detailNew.LocationId
+                };
+            return View(model);
+        }
+
+        //POST: Edit 
+        //Event/Edit/{id}
+        [HttpPost]
+        [ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, EventEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.EventId != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateEventService();
+
+            if (service.UpdateEvent(model))
+            {
+                TempData["SaveResult"] = "This Event has been updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "This Event could not be updated at this time.");
+            return View(model);
+        }
+
+        //GET: Delete
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var src = CreateEventService();
+            var model = src.GetEventById(id);
+            return View(model);
+        }
+
+        //POST: Delete
+        //Event/Delete/{id}
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteEvent(int id)
+        {
+            var service = CreateEventService();
+
+            service.DeleteEvent(id);
+
+            TempData["SaveResult"] = "This Event has been deleted.";
+
+            return RedirectToAction("Index");
+        }
+
         private EventService CreateEventService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());

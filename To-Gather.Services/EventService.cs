@@ -49,5 +49,41 @@ namespace To_Gather.Services
             }).ToList();
             return allEvents;
         }
+
+        public EventDetail GetEventById(int id)
+        {
+            Event getEvent = _db.Events.Single(e => e.EventId == id);
+            EventDetail detailEvent = new EventDetail
+            {
+                EventId = getEvent.EventId,
+                Title = getEvent.Title,
+                Description = getEvent.Description,
+                EventTime = getEvent.EventTime,
+                IsOfAge = getEvent.IsOfAge,
+                ActivityId = getEvent.ActivityId,
+                LocationId = getEvent.LocationId
+            };
+            return detailEvent;
+        }
+
+        public bool UpdateEvent(EventEdit model)
+        {
+            Event editEvent = _db.Events.Single(e => e.EventId == model.EventId);
+            editEvent.Title = model.Title;
+            editEvent.Description = model.Description;
+            editEvent.EventTime = model.EventTime;
+            editEvent.IsOfAge = model.IsOfAge;
+            editEvent.ActivityId = model.ActivityId;
+            editEvent.LocationId = model.LocationId;
+
+            return _db.SaveChanges() == 1;
+        }
+
+        public bool DeleteEvent(int id)
+        {
+            Event deleteEvent = _db.Events.Single(e => e.EventId == id);
+            _db.Events.Remove(deleteEvent);
+            return _db.SaveChanges() > 0;
+        }
     }
 }
