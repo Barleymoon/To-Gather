@@ -89,10 +89,29 @@ namespace To_Gather.Services
             UsersActivity usersActivity = new UsersActivity()
             {
                 ActivityId = model.ActivityId,
-                ProfileId = model.ProfileId
+                ProfileId = userProfile.ProfileId
             };
             _db.UsersActivities.Add(usersActivity);
             return _db.SaveChanges() == 1;
+        }
+
+        public bool RemoveUserActivity(int id)
+        {
+            UsersActivity removeUserActivity = _db.UsersActivities.Single(ua => ua.UsersActivityId == id);
+            _db.UsersActivities.Remove(removeUserActivity);
+            return _db.SaveChanges() == 1;
+        }
+
+        public UsersActivityDetail GetUserActivityById(int id)
+        {
+            UsersActivity getUserActivity = _db.UsersActivities.Single(ua => ua.UsersActivityId == id);
+            UsersActivityDetail activityDetail = new UsersActivityDetail()
+            {
+                UsersActivityId = getUserActivity.UsersActivityId,
+                ActivityId = getUserActivity.ActivityId,
+                ProfileId = getUserActivity.ProfileId
+            };
+            return activityDetail;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace To_Gather.WebMVC.Controllers
             return View(model);
         }
 
-        public ActionResult Join()
+        public ActionResult Create()
         {
             UsersActivityService usersActivityService = CreateUsersActivityService();
             var usersActivities = usersActivityService.GetUsersActivities();
@@ -33,9 +33,9 @@ namespace To_Gather.WebMVC.Controllers
         }
 
         [HttpPost]
-        [ActionName("Join")]
+        //[ActionName("Join")]
         [ValidateAntiForgeryToken]
-        public ActionResult Join(UsersActivityCreate model)
+        public ActionResult Create(UsersActivityCreate model)
         {
             if (!ModelState.IsValid) return View(ModelState);
 

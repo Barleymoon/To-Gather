@@ -94,11 +94,30 @@ namespace To_Gather.Services
             UserEvent userEvent = new UserEvent()
             {
                 EventId = model.EventId,
-                ProfileId = model.ProfileId
+                ProfileId = userProfile.ProfileId
             };
 
             _db.UserEvents.Add(userEvent);
             return _db.SaveChanges() == 1;
+        }
+
+        public bool RemoveUserEvent(int id)
+        {
+            UserEvent removeUserEvent = _db.UserEvents.Single(ue => ue.UserEventId == id);
+            _db.UserEvents.Remove(removeUserEvent);
+            return _db.SaveChanges() == 1;
+        }
+
+        public UserEventDetail GetUserEventById(int id)
+        {
+            UserEvent getEvent = _db.UserEvents.Single(ue => ue.UserEventId == id);
+            UserEventDetail eventDetail = new UserEventDetail()
+            {
+                UserEventId = getEvent.UserEventId,
+                EventId = getEvent.EventId,
+                ProfileId = getEvent.ProfileId
+            };
+            return eventDetail;
         }
     }
 }

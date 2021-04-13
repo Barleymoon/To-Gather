@@ -66,9 +66,34 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.UserActivities)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserActivities)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserEvents)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserEvents)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new {  id = Model.ProfileId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProfileId }) |
+    @using (Html.BeginForm("Remove", "UsersActivity"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.UsersActivityId)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Remove" class="btn btn-default" /> |
+        </div>
+    }
     @Html.ActionLink("Back to List", "Index")
 </p>

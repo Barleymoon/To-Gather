@@ -24,7 +24,7 @@ namespace To_Gather.WebMVC.Controllers
             return View(model);
         }
 
-        public ActionResult Join()
+        public ActionResult Create()
         {
             UserEventService userEventService = CreateUserEventService();
             var eventService = userEventService.GetAllUsersEvent();
@@ -32,9 +32,9 @@ namespace To_Gather.WebMVC.Controllers
         }
 
         [HttpPost]
-        [ActionName("Join")]
+        // [ActionName("Join")]
         [ValidateAntiForgeryToken]
-        public ActionResult Join(UserEventCreate model)
+        public ActionResult Create(UserEventCreate model)
         {
             if (!ModelState.IsValid) return View(ModelState);
 

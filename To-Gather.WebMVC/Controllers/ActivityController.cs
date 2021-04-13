@@ -122,12 +122,14 @@ namespace To_Gather.WebMVC.Controllers
         public ActionResult DeleteActivity(int id)
         {
             var src = CreateActivityService();
+            
             src.DeleteActivity(id);
 
             TempData["SaveResult"] = "This activity was deleted";
 
             return RedirectToAction("Index");
         }
+
 
         //GET: Join
         public ActionResult Join()
@@ -154,6 +156,31 @@ namespace To_Gather.WebMVC.Controllers
 
             ModelState.AddModelError("", "This activity could not be added to your profile.");
             return View(model);
+        }
+
+
+        //GET: Remove
+        [ActionName("Remove")]
+        public ActionResult Remove(int id)
+        {
+            var src = CreateActivityService();
+            var model = src.GetUserActivityById(id);
+            return View(model);
+        }
+
+        //POST: Remove/UserActivity/{id}
+        [ActionName("Remove")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveUserActivity(int id)
+        {
+            var src = CreateActivityService();
+
+            src.RemoveUserActivity(id);
+
+            TempData["SaveResult"] = "This activity has been removed from your profile.";
+
+            return RedirectToAction("Index");
         }
 
         private ActivityService CreateActivityService()

@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using To_Gather.Data;
 using To_Gather.Models.ActivityModels;
+using To_Gather.Models.UserEventModels;
 using To_Gather.Models.UserModels;
 using To_Gather.Models.UserProfileModels;
+using To_Gather.Models.UsersActivityModels;
 
 namespace To_Gather.Services
 {
@@ -22,7 +24,7 @@ namespace To_Gather.Services
 
         public bool CreateUser(UserProfileCreate model)
         {
-            List<Activity> allActivities = _db.Activities.ToList();
+            //List<Activity> allActivities = _db.Activities.ToList();
 
             UserProfile userProfile = new UserProfile()
             {
@@ -61,11 +63,11 @@ namespace To_Gather.Services
             return profile;
         }
 
+
         public UserProfileDetail GetProfileById(int id)
         {
             UserProfile getProfile = _db.UserProfiles.Single(up => up.ProfileId == id);
-            List<int> allActivityIds = _db.UsersActivities.Where(a => a.ProfileId == getProfile.ProfileId).Select(a => a.ActivityId).ToList();
-            List<ActivityDetail> activityDetails = GetActivityDetailsByProfileIds(allActivityIds);
+
             UserProfileDetail profileDetail = new UserProfileDetail()
             {
                 ProfileId = getProfile.ProfileId,
@@ -75,37 +77,17 @@ namespace To_Gather.Services
                 Age = getProfile.Age,
                 CreatedUser = getProfile.CreatedUser,
                 Email = getProfile.Email,
-                Activities = activityDetails
+                UserActivities = getProfile.UsersActivities.Select(ua => new UsersActivityListItem
+                {
+                    ActivityId = ua.ActivityId
+                }).ToList(),
+                UserEvents = getProfile.UserEvents.Select(ue => new UserEventListItem
+                {
+                    EventId = ue.EventId
+                }).ToList()
             };
-
             return profileDetail;
         }
-
-        /*public ActivityDetail GetActivityDetailsByProfileIds()
-        {
-            List<int> allActivityIds = _db.UserActivities.Where(a => a.ProfileId == ProfileId).Select(a => a.ActivityId).ToList();
-
-            foreach (Activity activityId in allActivityIds)
-            {
-                return new ActivityDetail();
-            }
-        }*/
-
-        public List<ActivityDetail> GetActivityDetailsByProfileIds(List<int> allActivityIds)
-        {
-            UserProfile getProfile = _db.UserProfiles.Single(up => up.OwnerId == _userId);
-            List<int> allActivityId = _db.UsersActivities.Where(a => a.ProfileId == getProfile.ProfileId).Select(a => a.ActivityId).ToList();
-            List<ActivityDetail> myActivity = new List<ActivityDetail>();
-
-            foreach (var activity in myActivity)
-            {
-                return new List<ActivityDetail>();
-            }
-            
-            return myActivity;
-        }
-
-
 
         public bool UpdateUserProfile(UserProfileEdit model)
         {

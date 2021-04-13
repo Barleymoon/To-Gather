@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using To_Gather.Data;
 using To_Gather.Models.ActivityModels;
+using To_Gather.Models.UserEventModels;
+using To_Gather.Models.UsersActivityModels;
 
 namespace To_Gather.Models.UserProfileModels
 {
@@ -22,8 +24,10 @@ namespace To_Gather.Models.UserProfileModels
         public string Email { get; set; }
         // public List<int> ActivityIds { get; set; }
 
-        public List<ActivityDetail> Activities { get; set; }
-        
-        // public List<UserEvent> UserEvents { get; set; }
+        // public List<ActivityDetail> Activities { get; set; }
+
+        public List<UsersActivityListItem> UserActivities { get; set; }
+        public List<UserEventListItem> UserEvents { get; set; }
+        public int UsersActivityId { get; set; }
     }
 }

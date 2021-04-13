@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using To_Gather.Data;
 using To_Gather.Models.EventModels;
+using To_Gather.Models.UserEventModels;
 using To_Gather.Services;
 
 namespace To_Gather.WebMVC.Controllers
@@ -133,6 +134,56 @@ namespace To_Gather.WebMVC.Controllers
 
             TempData["SaveResult"] = "This Event has been deleted.";
 
+            return RedirectToAction("Index");
+        }
+
+        //GET: Join
+        public ActionResult Join()
+        {
+            return View();
+        }
+
+        //POST: Join
+        [HttpPost]
+        [ActionName("Join")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Join(UserEventCreate model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var service = CreateEventService();
+
+            if (service.JoinUserEvent(model))
+            {
+                TempData["SaveResult"] = "This event has been added to your profile.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "This event could not be added to your profile.");
+            return View(model);
+        }
+
+        //GET: Remove
+        [ActionName("Remove")]
+        public ActionResult Remove(int id)
+        {
+            var src = CreateEventService();
+            var model = src.GetUserEventById(id);
+            return View(model);
+        }
+
+        //POST: Remove
+        [HttpPost]
+        [ActionName("Remove")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveUserEvent(int id)
+        {
+            var src = CreateEventService();
+
+            src.RemoveUserEvent(id);
+
+            TempData["SaveResult"] = "This Event was removed from your profile.";
+            
             return RedirectToAction("Index");
         }
 

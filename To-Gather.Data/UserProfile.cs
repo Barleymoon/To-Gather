@@ -33,6 +33,6 @@ namespace To_Gather.Data
         public DateTimeOffset CreatedUser { get; set; }
 
         public virtual List<UsersActivity> UsersActivities { get; set; } = new List<UsersActivity>();
-        // public List<UserEvent> UserEvents { get; set; }
+        public virtual List<UserEvent> UserEvents { get; set; } = new List<UserEvent>();
     }
 }

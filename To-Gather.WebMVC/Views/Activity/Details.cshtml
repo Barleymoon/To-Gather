@@ -54,5 +54,14 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ActivityId }) |
+    @using (Html.BeginForm("Join", "Activity"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ActivityId)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Join" class="btn btn-default" /> |
+        </div>
+    }
     @Html.ActionLink("Back to List", "Index")
 </p>
