@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using To_Gather.Data;
 using To_Gather.Models.EventModels;
+using To_Gather.Models.UserEventModels;
 
 namespace To_Gather.Services
 {
@@ -84,6 +85,20 @@ namespace To_Gather.Services
             Event deleteEvent = _db.Events.Single(e => e.EventId == id);
             _db.Events.Remove(deleteEvent);
             return _db.SaveChanges() > 0;
+        }
+
+        public bool JoinUserEvent(UserEventCreate model)
+        {
+            UserProfile userProfile = _db.UserProfiles.Single(up => up.OwnerId == _userId);
+
+            UserEvent userEvent = new UserEvent()
+            {
+                EventId = model.EventId,
+                ProfileId = model.ProfileId
+            };
+
+            _db.UserEvents.Add(userEvent);
+            return _db.SaveChanges() == 1;
         }
     }
 }

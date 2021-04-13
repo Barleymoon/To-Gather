@@ -38,6 +38,7 @@ namespace To_Gather.Data
         public DbSet<UsersActivity> UsersActivities { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<UserEvent> UserEvents { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

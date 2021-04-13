@@ -5,43 +5,42 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using To_Gather.Data;
-using To_Gather.Models.UsersActivityModels;
+using To_Gather.Models.UserEventModels;
 using To_Gather.Services;
 
 namespace To_Gather.WebMVC.Controllers
 {
     [Authorize]
-    public class UsersActivityController : Controller
+    public class UserEventController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
-
-        // GET: UsersActivity
+        // GET: UserEvent
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new UsersActivityService(userId);
-            var model = service.GetUsersActivities();
+            var service = new UserEventService(userId);
+            var model = service.GetAllUsersEvent();
 
             return View(model);
         }
 
         public ActionResult Join()
         {
-            UsersActivityService usersActivityService = CreateUsersActivityService();
-            var usersActivities = usersActivityService.GetUsersActivities();
-            return View(usersActivities);
+            UserEventService userEventService = CreateUserEventService();
+            var eventService = userEventService.GetAllUsersEvent();
+            return View(eventService);
         }
 
         [HttpPost]
         [ActionName("Join")]
         [ValidateAntiForgeryToken]
-        public ActionResult Join(UsersActivityCreate model)
+        public ActionResult Join(UserEventCreate model)
         {
             if (!ModelState.IsValid) return View(ModelState);
 
-            var service = CreateUsersActivityService();
+            var service = CreateUserEventService();
 
-            if (service.CreateUsersActivity(model))
+            if (service.CreateUserEvent(model))
             {
                 return RedirectToAction("Index");
             }
@@ -49,10 +48,10 @@ namespace To_Gather.WebMVC.Controllers
             return View(model);
         }
 
-        private UsersActivityService CreateUsersActivityService()
+        public UserEventService CreateUserEventService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new UsersActivityService(userId);
+            var service = new UserEventService(userId);
             return service;
         }
     }

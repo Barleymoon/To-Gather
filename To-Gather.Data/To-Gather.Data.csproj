@@ -79,10 +79,15 @@
     <Compile Include="Migrations\202104122036327_UserActivityChanged.Designer.cs">
       <DependentUpon>202104122036327_UserActivityChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104130102465_EventUserAdded.cs" />
+    <Compile Include="Migrations\202104130102465_EventUserAdded.Designer.cs">
+      <DependentUpon>202104130102465_EventUserAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UsersActivity.cs" />
     <Compile Include="UserProfile.cs" />
+    <Compile Include="UserEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -103,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104122036327_UserActivityChanged.resx">
       <DependentUpon>202104122036327_UserActivityChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104130102465_EventUserAdded.resx">
+      <DependentUpon>202104130102465_EventUserAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

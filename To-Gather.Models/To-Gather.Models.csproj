@@ -72,6 +72,9 @@
     <Compile Include="LocationModels\LocationEdit.cs" />
     <Compile Include="LocationModels\LocationListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserEventModels\UserEventCreate.cs" />
+    <Compile Include="UserEventModels\UserEventDetail.cs" />
+    <Compile Include="UserEventModels\UserEventListItem.cs" />
     <Compile Include="UserProfileModels\UserProfileCreate.cs" />
     <Compile Include="UserProfileModels\UserProfileDetail.cs" />
     <Compile Include="UserProfileModels\UserProfileEdit.cs" />
