@@ -84,16 +84,9 @@
 
     </dl>
 </div>
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProfileId }) |
-    @using (Html.BeginForm("Remove", "UsersActivity"))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.UsersActivityId)
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Remove" class="btn btn-default" /> |
-        </div>
-    }
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -28,6 +28,5 @@ namespace To_Gather.Models.UserProfileModels
 
         public List<UsersActivityListItem> UserActivities { get; set; }
         public List<UserEventListItem> UserEvents { get; set; }
-        public int UsersActivityId { get; set; }
     }
 }

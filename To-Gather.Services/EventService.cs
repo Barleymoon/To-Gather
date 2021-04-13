@@ -67,6 +67,22 @@ namespace To_Gather.Services
             return detailEvent;
         }
 
+        public EventDetail GetEventByActivityId(int id)
+        {
+            Event eventDetail = (Event)_db.Events.Where(e => e.ActivityId == id);
+            EventDetail detailEvent = new EventDetail
+            {
+                EventId = eventDetail.EventId,
+                Title = eventDetail.Title,
+                Description = eventDetail.Description,
+                EventTime = eventDetail.EventTime,
+                IsOfAge = eventDetail.IsOfAge,
+                ActivityId = eventDetail.ActivityId,
+                LocationId = eventDetail.LocationId
+            };
+            return detailEvent;
+        }
+
         public bool UpdateEvent(EventEdit model)
         {
             Event editEvent = _db.Events.Single(e => e.EventId == model.EventId);
@@ -101,13 +117,6 @@ namespace To_Gather.Services
             return _db.SaveChanges() == 1;
         }
 
-        public bool RemoveUserEvent(int id)
-        {
-            UserEvent removeUserEvent = _db.UserEvents.Single(ue => ue.UserEventId == id);
-            _db.UserEvents.Remove(removeUserEvent);
-            return _db.SaveChanges() == 1;
-        }
-
         public UserEventDetail GetUserEventById(int id)
         {
             UserEvent getEvent = _db.UserEvents.Single(ue => ue.UserEventId == id);
@@ -118,6 +127,13 @@ namespace To_Gather.Services
                 ProfileId = getEvent.ProfileId
             };
             return eventDetail;
+        }
+
+        public bool RemoveUserEvent(int id)
+        {
+            UserEvent removeUserEvent = _db.UserEvents.Single(ue => ue.UserEventId == id);
+            _db.UserEvents.Remove(removeUserEvent);
+            return _db.SaveChanges() == 1;
         }
     }
 }
