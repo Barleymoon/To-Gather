@@ -54,11 +54,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityModels\ActivityCreate.cs" />
+    <Compile Include="ActivityModels\ActivityDetail.cs" />
+    <Compile Include="CategoryModels\ActivityDisplayItem.cs" />
+    <Compile Include="ActivityModels\ActivityEdit.cs" />
+    <Compile Include="ActivityModels\ActivityListItem.cs" />
+    <Compile Include="CategoryModels\CategoryCreate.cs" />
+    <Compile Include="CategoryModels\CategoryDetail.cs" />
+    <Compile Include="CategoryModels\CategoryEdit.cs" />
+    <Compile Include="CategoryModels\CategoryListItem.cs" />
+    <Compile Include="EventModels\EventDetail.cs" />
+    <Compile Include="EventModels\EventEdit.cs" />
+    <Compile Include="EventModels\EventListItem.cs" />
+    <Compile Include="EventModels\EventCreate.cs" />
+    <Compile Include="LocationModels\LocationCreate.cs" />
+    <Compile Include="LocationModels\LocationDetail.cs" />
+    <Compile Include="LocationModels\LocationEdit.cs" />
+    <Compile Include="LocationModels\LocationListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserEventModels\UserEventCreate.cs" />
+    <Compile Include="UserEventModels\UserEventDetail.cs" />
+    <Compile Include="UserEventModels\UserEventListItem.cs" />
+    <Compile Include="UserProfileModels\UserProfileCreate.cs" />
+    <Compile Include="UserProfileModels\UserProfileDetail.cs" />
+    <Compile Include="UserProfileModels\UserProfileEdit.cs" />
+    <Compile Include="UserProfileModels\UserProfileListItem.cs" />
+    <Compile Include="UsersActivityModels\UsersActivityDetail.cs" />
+    <Compile Include="UsersActivityModels\UsersActivityCreate.cs" />
+    <Compile Include="UsersActivityModels\UsersActivityListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\To-Gather.Data\To-Gather.Data.csproj">
+      <Project>{c2838134-545f-44ce-806f-0fec4f8d2028}</Project>
+      <Name>To-Gather.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

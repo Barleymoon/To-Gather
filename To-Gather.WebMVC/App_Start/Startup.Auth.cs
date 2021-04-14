@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
+using To_Gather.Data;
 using To_Gather.WebMVC.Models;
 
 namespace To_Gather.WebMVC
