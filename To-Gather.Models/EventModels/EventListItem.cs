@@ -28,8 +28,5 @@ namespace To_Gather.Models.EventModels
         [Required]
         [Display(Name = "Must be over 21 to attend")]
         public bool IsOfAge { get; set; }
-
-        /*public int ActivityId { get; set; }
-        public int LocationId { get; set; }*/
     }
 }
